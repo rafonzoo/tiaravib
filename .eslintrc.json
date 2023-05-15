@@ -36,16 +36,31 @@
     "import/order": [
       "warn",
       {
-        "groups": ["type", "builtin", "external", ["internal", "sibling"]],
+        "groups": ["type", "builtin", "external", "internal"],
         "newlines-between": "never",
         "pathGroups": [
           {
-            "pattern": "@app/components/**",
+            "pattern": "@/components/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "next/font/google",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "next/navigation",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "next/**",
             "group": "internal",
             "position": "after"
           }
         ],
-        "pathGroupsExcludedImportTypes": ["internal", "type", "sibling"],
+        "pathGroupsExcludedImportTypes": ["type", "sibling"],
         "warnOnUnassignedImports": false,
         "alphabetize": { "order": "desc" }
       }
