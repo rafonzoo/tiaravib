@@ -5,9 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "npx serve@latest out",
+    "start": "next start",
     "lint": "next lint",
-    "export": "next start",
+    "export": "npx serve@latest out",
     "format": "yarn run eslint && yarn run prettier",
     "server": "cd ../ && cd server && npm run develop",
     "update": "ncu --interactive --format group",
