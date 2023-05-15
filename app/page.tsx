@@ -11,7 +11,7 @@ export const metadata = {
 async function getPages() {
   try {
     const url = `${process.env.API_URL}/pages`
-    const res = await fetch(url, { next: { revalidate: 10 } })
+    const res = await fetch(url, { next: { revalidate: 60 } })
     const json = await res.json()
 
     return (json.data as iPage[]).sort((a, b) => a.id - b.id)
