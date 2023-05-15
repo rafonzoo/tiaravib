@@ -32,7 +32,10 @@ const Picture: FC<ComponentPropsWithoutRef<'img'>> = ({ src, alt }) => {
 
 async function getPage(slug: string) {
   try {
-    const res = await fetch(`${process.env.API_URL}/pages`)
+    const res = await fetch(`${process.env.API_URL}/pages`, {
+      next: { revalidate: 10 },
+    })
+
     const json = ((await res.json()).data as iPage[]).find(
       (item) => item.attributes.slug === slug
     )!
@@ -69,7 +72,9 @@ const Page = async ({ params }: { params: { slug: string } }) => {
 }
 
 export async function generateStaticParams() {
-  const res = await fetch(`${process.env.API_URL}/pages`)
+  const res = await fetch(`${process.env.API_URL}/pages`, {
+    next: { revalidate: 10 },
+  })
   const json = (await res.json()).data as iPage[]
 
   return json.map((post) => ({ slug: post.attributes.slug }))
