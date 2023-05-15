@@ -32,7 +32,9 @@ const Picture: FC<ComponentPropsWithoutRef<'img'>> = ({ src, alt }) => {
 
 async function getPage(slug: string) {
   try {
-    const res = await fetch(`${process.env.API_URL}/pages`)
+    const res = await fetch(`${process.env.API_URL}/pages`, {
+      cache: 'no-store',
+    })
     const json = ((await res.json()).data as iPage[]).find(
       (item) => item.attributes.slug === slug
     )!
@@ -68,20 +70,11 @@ const Page = async ({ params }: { params: { slug: string } }) => {
   )
 }
 
-export async function generateStaticParams() {
-  const res = await fetch(`${process.env.API_URL}/pages`)
-  const json = (await res.json()).data as iPage[]
+// export async function generateStaticParams() {
+//   const res = await fetch(`${process.env.API_URL}/pages`)
+//   const json = (await res.json()).data as iPage[]
 
-  return json.map((post) => ({ slug: post.attributes.slug }))
-}
-
-// export const generateMetadata = ({ params }: Parameters<iPage>[0]) => {
-//   const product = products.find((item) => item.slug === params.slug)
-
-//   return {
-//     title: setPageTitle(product?.title),
-//     description: product?.description ?? site.description,
-//   }
+//   return json.map((post) => ({ slug: post.attributes.slug }))
 // }
 
 export default Page
