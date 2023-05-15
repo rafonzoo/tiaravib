@@ -71,13 +71,13 @@ const Page = async ({ params }: { params: { slug: string } }) => {
   )
 }
 
-// export async function generateStaticParams() {
-//   const res = await fetch(`${process.env.API_URL}/pages`, {
-//     next: { revalidate: 10 },
-//   })
-//   const json = (await res.json()).data as iPage[]
+export async function generateStaticParams() {
+  const res = await fetch(`${process.env.API_URL}/pages`, {
+    next: { revalidate: 10 },
+  })
 
-//   return json.map((post) => ({ slug: post.attributes.slug }))
-// }
+  const json = (await res.json()).data as iPage[]
+  return json.map((post) => ({ slug: post.attributes.slug }))
+}
 
 export default Page
